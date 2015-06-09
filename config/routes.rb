@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :users
 
 
@@ -17,8 +19,7 @@ Rails.application.routes.draw do
   get "/visits/:id", :controller => "visits", :action => "show"
 
   # UPDATE
-  get "/visits/:id/edit", :controller => "visits", :action => "edit"
-  post "/update_visit/:id", :controller => "visits", :action => "update"
+
 
   # DELETE
   get "/delete_visit/:id", :controller => "visits", :action => "destroy"

@@ -1,6 +1,17 @@
 class VisitsController < ApplicationController
+
+before_action :check_if_owner, only: [:destroy]
+
+
+ def check_if_owner
+  visit = visit.find(params[:id])
+    if visit.user_id != current_user.id
+      redirect_to "/visit", notice: "Don't you want to see YOUR visits?!"
+    end
+  end
   def index
-    @visits = Visit.all
+    @visits = current_user.visits
+
   end
 
   def show
@@ -13,27 +24,16 @@ class VisitsController < ApplicationController
 
   def create
     @visit = Visit.new
-    @visit.restaurant = params[:restaurant]
-    @visit.email = params[:email]
-    @visit.date = params[:date]
+    @visit.user_id = current_user.id
+    @visit.restaurant_id = params[:restaurant_id]
 
     if @visit.save
       redirect_to "/visits", :notice => "Visit created successfully."
     else
       render 'new'
     end
-  end
 
-  def edit
-    @visit = Visit.find(params[:id])
-  end
 
-  def update
-    @visit = Visit.find(params[:id])
-
-    @visit.restaurant = params[:restaurant]
-    @visit.email = params[:email]
-    @visit.date = params[:date]
 
     if @visit.save
       redirect_to "/visits", :notice => "Visit updated successfully."

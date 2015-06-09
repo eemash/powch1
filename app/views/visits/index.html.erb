@@ -25,13 +25,10 @@
       <div class="panel-body">
         <dl>
           <dt>Restaurant</dt>
-          <dd><%= visit.restaurant %></dd>
-
-          <dt>Email</dt>
-          <dd><%= visit.email %></dd>
+          <dd><%= visit.restaurant.name %></dd>
 
           <dt>Date</dt>
-          <dd><%= visit.date %></dd>
+          <dd><%= visit.created_at.strftime('%b,%e at %l:%M%P') %></dd>
 
         </dl>
         <div class="btn-group btn-group-justified">
@@ -39,9 +36,7 @@
             <i class="fa fa-search-plus"></i>
           </a>
 
-          <a href="/visits/<%= visit.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a>
+
 
           <a href="/delete_visit/<%= visit.id %>" class="btn btn-danger" rel="nofollow">
             <i class="fa fa-trash-o"></i>

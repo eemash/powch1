@@ -43,6 +43,9 @@
         <ul class="nav navbar-nav">
           <li><a href="/restaurants">Restaurants</a></li>
           <li><a href="/visits">Visits</a></li>
+          <% if current_user.try(:is_admin) == true %>
+          <li><a href="#">Administrator</a></li>
+          <% end %>
         </ul>
 
          <ul class="nav navbar-nav navbar-right">
@@ -50,6 +53,8 @@
             <li><a href="/users/sign_out" data-method='delete'>Sign out</a></li>
             <li><a href="/users/edit"><%= current_user.email %></a></li>
           <% else %>
+
+
             <li><a href="/users/sign_up">Sign up</a></li>
             <li><a href="/users/sign_in">Sign in</a></li>
           <% end %>
